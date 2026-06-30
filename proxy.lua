@@ -246,3 +246,14 @@ AddHook("OnSendPacket", "LucjferProxy", function(type, pkt)
     end
 
 end)
+
+------------------------------------------------------------
+-- Startup
+------------------------------------------------------------
+
+LogToConsole("`9======================================")
+LogToConsole(CONFIG.PREFIX .. "`2Loaded Successfully!")
+LogToConsole(CONFIG.PREFIX .. "`7Version : `91.0")
+LogToConsole(CONFIG.PREFIX .. "`7Author  : `9" .. CONFIG.AUTHOR)
+LogToConsole(CONFIG.PREFIX .. "`7Commands: `2/menu `7or `2/m")
+LogToConsole("`9======================================")
