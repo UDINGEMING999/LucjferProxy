@@ -116,3 +116,133 @@ function LockStatus()
     })
 
 end
+
+
+------------------------------------------------------------
+-- Command Handler
+------------------------------------------------------------
+
+AddHook("OnSendPacket", "LucjferProxy", function(type, pkt)
+
+    if type ~= 2 then
+        return
+    end
+
+    --------------------------------------------------------
+    -- MENU
+    --------------------------------------------------------
+
+    if pkt:find("action|input\n|text|/m") or pkt:find("action|input\n|text|/menu") then
+        OpenMenu()
+        return true
+    end
+
+    --------------------------------------------------------
+    -- LOCK STATUS
+    --------------------------------------------------------
+
+    if pkt:find("action|input\n|text|/ls") then
+        LockStatus()
+        return true
+    end
+
+    --------------------------------------------------------
+    -- DROP DIAMOND LOCK
+    --------------------------------------------------------
+
+    local d = pkt:match("action|input\n|text|/d%s+(%d+)")
+
+    if d then
+        DropItem(1796, tonumber(d))
+        LogToConsole(CONFIG.PREFIX ..
+            "`2Dropped `9" .. d .. " `bDiamond Lock")
+        return true
+    end
+
+    --------------------------------------------------------
+    -- DROP ALL DIAMOND LOCK
+    --------------------------------------------------------
+
+    if pkt:find("action|input\n|text|/da") then
+
+        local count = GetItemCount(1796)
+
+        if count > 0 then
+            DropItem(1796, count)
+            LogToConsole(CONFIG.PREFIX ..
+                "`2Dropped All `9Diamond Lock `7(" .. count .. ")")
+        else
+            LogToConsole(CONFIG.PREFIX ..
+                "`4You don't have any Diamond Lock.")
+        end
+
+        return true
+    end
+
+    --------------------------------------------------------
+    -- DROP WORLD LOCK
+    --------------------------------------------------------
+
+    local w = pkt:match("action|input\n|text|/w%s+(%d+)")
+
+    if w then
+        DropItem(242, tonumber(w))
+        LogToConsole(CONFIG.PREFIX ..
+            "`2Dropped `9" .. w .. " `6World Lock")
+        return true
+    end
+
+    --------------------------------------------------------
+    -- DROP ALL WORLD LOCK
+    --------------------------------------------------------
+
+    if pkt:find("action|input\n|text|/wa") then
+
+        local count = GetItemCount(242)
+
+        if count > 0 then
+            DropItem(242, count)
+            LogToConsole(CONFIG.PREFIX ..
+                "`2Dropped All `6World Lock `7(" .. count .. ")")
+        else
+            LogToConsole(CONFIG.PREFIX ..
+                "`4You don't have any World Lock.")
+        end
+
+        return true
+    end
+
+    --------------------------------------------------------
+    -- DROP BLUE GEM LOCK
+    --------------------------------------------------------
+
+    local b = pkt:match("action|input\n|text|/b%s+(%d+)")
+
+    if b then
+        DropItem(7188, tonumber(b))
+        LogToConsole(CONFIG.PREFIX ..
+            "`2Dropped `9" .. b .. " `1Blue Gem Lock")
+        return true
+    end
+
+    --------------------------------------------------------
+    -- DROP ALL BLUE GEM LOCK
+    --------------------------------------------------------
+
+    if pkt:find("action|input\n|text|/ba") then
+
+        local count = GetItemCount(7188)
+
+        if count > 0 then
+            DropItem(7188, count)
+            LogToConsole(CONFIG.PREFIX ..
+                "`2Dropped All `1Blue Gem Lock `7(" .. count .. ")")
+        else
+            LogToConsole(CONFIG.PREFIX ..
+                "`4You don't have any Blue Gem Lock.")
+        end
+
+        return true
+    end
+
+end)
